@@ -1,0 +1,26 @@
+public int check() {
+    int i, l = 0;
+    for (i = 0; i < (NXN+NXN+2); i++) {
+        switch (i) {
+            case 0: l = lineSum(0, 1, 2); break;
+            case 1: l = lineSum(3, 4, 5); break;
+            case 2: l = lineSum(6, 7, 8); break;
+            case 3: l = lineSum(0, 3, 6); break;
+            case 4: l = lineSum(1, 4, 7); break;
+            case 5: l = lineSum(2, 5, 8); break;
+            case 6: l = lineSum(0, 4, 8); break;
+            case 7: l = lineSum(2, 4, 6); break;
+        }
+        if (l == NXN * MARU) {
+            return MARU;
+        } else if (l == NXN * BATSU) {
+            return BATSU;
+        }
+    }
+    for (i = 0; i < NXN*NXN; i++) {
+        if (stones[i].getColor() == EMPTY) {
+            return NEXT;
+        }
+    }
+    return DRAW;
+}

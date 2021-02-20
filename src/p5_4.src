@@ -1,0 +1,7 @@
+float evaluate(Player p, int turn){
+    if(isWin()){
+        if(turn==p.getColor())return (float)(-1.0);
+        else if(turn!=p.getColor())return (float)(1.0);
+    }
+    return (float)0.0;
+}

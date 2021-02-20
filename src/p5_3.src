@@ -1,0 +1,18 @@
+boolean isWin(){
+    return (line(0,1,2)||
+            line(3,4,5)||
+            line(6,7,8)||
+            line(0,3,6)||
+            line(1,4,7)||
+            line(2,5,8)||
+            line(0,4,8)||
+            line(2,4,6));
+}
+boolean isDraw(){
+    int nEmpty=0;
+    for(int i=0; i<NXN*NXN; i++){
+        if(stones[i].getColor()==EMPTY)nEmpty++;
+    }
+    if(!isWin() && nEmpty==0)return true;
+    return false;
+}

@@ -1,0 +1,39 @@
+package tictactoe;
+
+import static tictactoe.Constants.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class Strategy {
+    int prompt(String name) {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int num = -1;
+        String fmt = null, instr = null;
+        do {
+            fmt = String.format("\n石を置く場所を番号で指定（ %s の番です ）：", name);
+            System.out.print(fmt);
+            try {
+                instr = br.readLine();
+                num = Integer.parseInt(instr);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (!(0 <= num && num < NXN * NXN)) {
+                System.out.println("0～" + (NXN * NXN - 1) + " の番号を指定して");
+                continue;
+            }
+            break;
+        } while (true);
+        return num;
+    }
+    int random(String name) {
+        System.out.printf("。。。　%s 思考中　。。。", name);
+        return (int) (Math.random() * (NXN * NXN));
+    }
+    private float minimax(Board board, int depth, int turn, Player player) {
+        //　minimax
+    }
+    int bestMove(Board board, Player player) {
+        // minimax
+    }
+}

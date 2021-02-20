@@ -1,0 +1,44 @@
+package tictactoe;
+import static tictactoe.Constants.*;
+
+public class Board {
+    private Stone[] stones = new Stone[NXN*NXN];;
+    public Board() {
+        for (int i = 0; i < NXN * NXN; i++) {
+            stones[i] = new Stone(i, EMPTY);
+        }
+    }
+    void setEmpty(int i){
+        stones[i]=new Stone(i, EMPTY);
+    }
+    void setBoard(Stone s) {
+        stones[s.getLocate()] = s;
+    }
+    Stone getBoard(int i){
+        return stones[i];
+    }
+    boolean canPut(Stone s) {
+        int n=s.getLocate();
+        if( !((0<=n)&&(n<NXN*NXN)) )  return false;
+        if (stones[s.getLocate()].getColor() != EMPTY)  return false;
+        return true;
+    }
+    void print() {  //盤面を表示する関数
+    }
+    private int lineSum(int n1, int n2, int n3) {
+        return stones[n1].getColor() + stones[n2].getColor() + stones[n3].getColor();
+    }
+    int check() {   //勝敗を判定する関数
+    }
+    private boolean line(int n1, int n2, int n3){
+        return (( stones[n1].getColor()!=EMPTY ) &&
+                ( stones[n1].getColor()==stones[n2].getColor() ) &&
+                ( stones[n1].getColor()==stones[n3].getColor() ));
+    }
+    boolean isWin(){    // もう一つの勝敗を判定する関数
+    }
+    boolean isDraw(){   // 勝敗がついていないのに、EMPTYのスロットがもうないならDRAW　
+    }
+    float evaluate(Player p, int turn){ // 局面を評価する（MINIMAX法が使う）
+    }
+}

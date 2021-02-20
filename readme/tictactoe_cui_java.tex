@@ -1,0 +1,312 @@
+% latex uft-8
+\documentclass[uplatex,a4paper,11pt,oneside,openany]{jsbook}
+%
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{ascmac}
+\usepackage{setspace}
+\usepackage{here}
+\usepackage{listings,jlisting} %日本語のコメントアウトをする場合jlistingが必要
+%ここからソースコードの表示に関する設定
+\usepackage{xcolor,comment}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\begin{comment}
+\lstset{
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  firstnumber=1000,                % start line enumeration with line 1000
+  frame=single,	                   % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Octave,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+\end{comment}
+
+%ここからソースコードの表示に関する設定
+
+\lstdefinestyle{customc}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  numbers=left,
+  frame=single,
+  xleftmargin=\parindent,
+  language=C,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+
+\lstdefinestyle{customjava}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  numbers=left,
+  frame=single,
+  xleftmargin=\parindent,
+  language=java,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+
+\lstdefinestyle{customasm}{
+  belowcaptionskip=1\baselineskip,
+  frame=L,
+  xleftmargin=\parindent,
+  language=[x86masm]Assembler,
+  basicstyle=\footnotesize\ttfamily,
+  commentstyle=\itshape\color{purple!40!black},
+}
+
+\lstset{escapechar=@,style=customjava}
+
+\makeatletter
+\def\ps@plainfoot{%
+  \let\@mkboth\@gobbletwo
+  \let\@oddhead\@empty
+  \def\@oddfoot{\normalfont\hfil-- \thepage\ --\hfil}%
+  \let\@evenhead\@empty
+  \let\@evenfoot\@oddfoot}
+  \let\ps@plain\ps@plainfoot
+\renewcommand{\chapter}{%
+  \if@openright\cleardoublepage\else\clearpage\fi
+  \global\@topnum\z@
+  \secdef\@chapter\@schapter}
+\makeatother
+%
+\newcommand{\maru}[1]{{\ooalign{%
+\hfil\hbox{$\bigcirc$}\hfil\crcr%
+\hfil\hbox{#1}\hfil}}}
+%
+\setlength{\textwidth}{\fullwidth}
+\setlength{\textheight}{40\baselineskip}
+\addtolength{\textheight}{\topskip}
+\setlength{\voffset}{-0.55in}
+%
+\begin{document}
+% START DOCUMENT
+%
+% COVER
+\begin{center}
+  \huge \par
+  \vspace{15mm}
+  \huge \par
+  \vspace{15mm}
+  \LARGE Tic Tac Toe (CUI - java) \par
+  \vspace{100mm}
+  \Large \date \par
+  \vspace{15mm}
+  \Large \par
+  \vspace{10mm}
+  \Large S.Matoike \par
+  \vspace{10mm}
+\end{center}
+\thispagestyle{empty}
+\clearpage
+\addtocounter{page}{-1}
+\newpage
+\setcounter{tocdepth}{3}
+%
+\tableofcontents
+%
+\chapter{javaによる三目並べ [Tic Tac Toe]}
+
+\section{制作する三目並べの概要}
+
+プログラムを実行すると、盤面が表示され、×の石を置く場所を指定するよう促されます
+
+画面上に示された番号を入力すると、その番号のスロットに×の石が置かれた盤面が表示され、次の手番の○に、石を置く場所を指定するように促されます
+
+手番を交互に変えながらゲームは進み、縦、横、斜めの何れかに、先に一列に自分の石を並べた方が勝ちとなります
+
+既に石の置かれているスロット番号を指定できませんし、スロット番号として 0 〜 8 以外の数値を指定することもできません
+
+\begin{spacing}{0.74}
+  \begin{verbatim}
+    スタート！ [Tic Tac Toe]
+    /---|---|---\
+    | 0 | 1 | 2 |
+    |---|---|---|
+    | 3 | 4 | 5 |
+    |---|---|---|
+    | 6 | 7 | 8 |
+    \---|---|---/
+    'X' さんのturnです
+    石を置く場所 0 〜 8 を指定して下さい : 4
+    /---|---|---\
+    | 0 | 1 | 2 |
+    |---|---|---|
+    | 3 | X | 5 |
+    |---|---|---|
+    | 6 | 7 | 8 |
+    \---|---|---/
+    'O' さんのturnです
+    石を置く場所 0 〜 8 を指定して下さい : 2
+    /---|---|---\
+    | 0 | 1 | O |
+    |---|---|---|
+    | 3 | X | 5 |
+    |---|---|---|
+    | 6 | 7 | 8 |
+    \---|---|---/
+    'X' さんのturnです
+    石を置く場所 0 〜 8 を指定して下さい :
+  \end{verbatim}
+\end{spacing}
+
+\section{定数定義のクラスと主処理}
+
+Constantsクラスに定数の一式をおいて、他のクラスと共有するようにします
+
+\lstinputlisting[caption=定数定義：Tic Tac Toe,label=prog1]{../src/tictactoe/Constants.java}
+
+コマンドライン引数の指定で、先手と後手を入れ替えられるようにしています
+
+\lstinputlisting[caption=main関数：Tic Tac Toe,label=prog2]{../src/tictactoe/TicTacToe.java}
+
+\section{ゲームクラス}
+
+コンストラクタで、２人のプレイヤー、１つの盤面の各インスタンスを用意します
+
+\lstinputlisting[caption=Gameクラス：Tic Tac Toe,label=prog3]{../src/p3.src}
+
+①盤面を表示し、②現在手番のプレーヤーに打つ手を決めさせ、③それを盤面に置きます　その次に④盤面の状態から勝敗を判定し、⑤手番を交代すること、これを勝敗がつくまで繰り返しています\\
+
+勝敗の確認、board.check() の結果を引数として受け取り、それに基づいて結果を表示します
+
+（上記のプログラム中で、//結果を表示する関数、の部分に収まる関数です）
+
+\lstinputlisting[caption=結果を表示する関数：Tic Tac Toe,label=prog3_1]{../src/p3_1.src}
+
+\section{石のクラス}
+
+石のクラスが持っているのは、その石が置かれる盤面上の位置（locate）と、そこへ置く石の種類（id=MARU or BATSU）です
+
+private な変数には、public な getter と setter を通してアクセスさせます
+
+\lstinputlisting[caption=石クラス：Tic Tac Toe,label=prog4]{../src/tictactoe/Stone.java}
+
+\section{盤面のクラス}
+
+盤面クラスが持っているのは、9つの石を置く場所を持つゲーム盤 stones[0] 〜 stones[8] です
+
+盤面の初期状態は、石を置く場所の全てが EMPTY の状態で、コンストラクタがその設定を行います
+
+canPut( Stone ) は、引数で受け取った石が、現在の盤面に置けるのかどうかをチェックします
+
+setBoard( Stone ) は、引数で受け取った石を、盤面上の指定された位置に置きます
+
+\lstinputlisting[caption=盤面クラス：Tic Tac Toe,label=prog5]{../src/p5.src}
+
+盤面上の石を置く場所には '0' 〜 '8' の数字を書き、MARU や BATSU の石の置かれた場所には、'O' あるいは 'X' の記号を書いています\\
+
+（以下は、//盤面を評価する関数、の部分に収まる関数です）
+
+\lstinputlisting[caption=盤面を表示する関数：Tic Tac Toe,label=prog5_1]{../src/p5_1.src}
+
+勝敗を判定するには、横3行、縦3列、あるいは2つの斜めのライン上に、MARU あるいは BATSU が並んでいるかどうかを調べます
+
+盤面上に EMPTY の状態の場所があったら、まだゲームは進行中（NEXT）です
+
+盤面上に EMPTY の状態の場所が無くなっており、かつ勝敗がついていないのなら、それは引き分け（DRAW）です\\
+
+（以下は、//勝敗を判定する関数、の部分に収まる関数です）
+
+\lstinputlisting[caption=勝敗を判定する関数：Tic Tac Toe,label=prog5_2]{../src/p5_2.src}
+
+（以下は、//もう一つの勝敗を判定する関数、の部分に収まる関数です）
+
+\lstinputlisting[caption=勝敗を判定する関数その２：Tic Tac Toe,label=prog5_3]{../src/p5_3.src}
+
+（以下は、後述する戦略MiniMax法で使う関数です）
+
+\lstinputlisting[caption=局面を評価する関数：Tic Tac Toe,label=prog5_4]{../src/p5_4.src}
+
+\section{プレイヤーのクラス}
+
+プレイヤークラスが持っているのは、プレイヤーの氏名、そのプレイヤーが採ろうとしている戦略、そのプレイヤーが置こうとしている石の種類（MARU か BATSU か）です
+
+putStone( Board ) の処理では、\\プレーヤーが選んでいる戦略（ Senryaku ）を使って決めた手 te=Te()（＝石の置き場所）を、\\引数で受け取ったその時の盤面（ board ）に置けるのかどうかを確認（ canPut( Stone ) ）して、\\置けるならば、盤面にその石を置きます（ board.setBoard( Stone ) ）
+
+この Playerクラスは、戦略クラス（class Strategy）を継承しています
+
+\lstinputlisting[caption=プレイヤークラス：Tic Tac Toe,label=prog6]{../src/tictactoe/Player.java}
+
+\section{戦略クラス（MiniMax）}
+
+Player クラスの親クラスです
+
+\lstinputlisting[caption=戦略クラス：Tic Tac Toe,label=prog7]{../src/p7.src}
+
+（以下は、上記の//minimax、の部分に納める関数です）
+
+\lstinputlisting[caption=戦略クラス-minimax法：Tic Tac Toe,label=prog8]{../src/p7_1.src}
+
+このMiniMax法は、最後（勝敗がつく）まで読み切るので、決して「負けることはありません」
+
+人間が、最善の手を打った場合には「引き分け」になります
+
+盤面が３✕３と、小さいのでMiniMaxで最後まで読み切ることができるわけですが、
+盤面が大きくなると、「アルファ・ベータ・刈り」が必要になります。
+
+\section{最終的な完成形}
+
+最終的なソースは、tictactoeフォルダの中に納めています。
+
+\begin{quotation}
+\% ls -l tictactoe\\
+total 56\\
+-rw-r--r--  1 mat  staff  3780  2 20 14:56 Board.java\\
+-rw-r--r--  1 mat  staff   691  2 20 14:01 Constants.java\\
+-rw-r--r--  1 mat  staff  1461  2 20 14:44 Game.java\\
+-rw-r--r--  1 mat  staff   970  2 20 14:11 Player.java\\
+-rw-r--r--  1 mat  staff   363  2 20 14:24 Stone.java\\
+-rw-r--r--  1 mat  staff  2657  2 20 14:59 Strategy.java\\
+-rw-r--r--  1 mat  staff   350  2 20 14:40 TicTacToe.java\\
+
+\end{quotation}
+
+
+%\lstinputlisting[caption=完成形：Tic Tac Toe,label=prog9]{../src/TicTacToe.java}
+
+
+%\section*{謝辞}
+%\addcontentsline{toc}{chapter}{謝辞}
+%
+\begin{thebibliography}{99}
+  \bibitem{1}
+\end{thebibliography}
+%
+% END DOCUMENT
+\end{document}
+%

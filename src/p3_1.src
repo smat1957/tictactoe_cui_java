@@ -1,0 +1,9 @@
+private void result(int winner) {
+    System.out.println("");
+    switch (winner) {
+      case DRAW:  System.out.print("引き分け\t");    break;
+      case MARU:  System.out.print("'O' の勝ち\t");  break;
+      case BATSU: System.out.print("'X' の勝ち\t");  break;
+    }
+    System.out.println("またね！");
+}

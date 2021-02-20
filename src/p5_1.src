@@ -1,0 +1,23 @@
+public void print() {
+    char[] bd = new char[NXN*NXN];
+    for (int i = 0; i < NXN*NXN; i++) {
+        if (stones[i].getId() == MARU) {
+            bd[i] = 'O';
+        } else if (stones[i].getColor() == BATSU) {
+            bd[i] = 'X';
+        } else {
+            bd[i] = (char) ('0' + i);
+        }
+    }
+    String fmt;
+    System.out.println("\n/---|---|---\\");
+    fmt = String.format("| %c | %c | %c |", bd[0], bd[1], bd[2]);
+    System.out.println(fmt);
+    System.out.println("|---|---|---|");
+    fmt = String.format("| %c | %c | %c |", bd[3], bd[4], bd[5]);
+    System.out.println(fmt);
+    System.out.println("|---|---|---|");
+    fmt = String.format("| %c | %c | %c |", bd[6], bd[7], bd[8]);
+    System.out.println(fmt);
+    System.out.println("\\---|---|---/");
+}
