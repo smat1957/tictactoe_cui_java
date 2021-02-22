@@ -230,7 +230,7 @@ setBoard( Stone ) は、引数で受け取った石を、盤面上の指定さ�
 
 盤面上の石を置く場所には '0' 〜 '8' の数字を書き、MARU や BATSU の石の置かれた場所には、'O' あるいは 'X' の記号を書いています\\
 
-（以下は、//盤面を評価する関数、の部分に収まる関数です）
+（以下は、//盤面を表示する関数、の部分に収まる関数です）
 
 \lstinputlisting[caption=盤面を表示する関数：Tic Tac Toe,label=prog5_1]{../src/p5_1.src}
 
@@ -248,7 +248,7 @@ setBoard( Stone ) は、引数で受け取った石を、盤面上の指定さ�
 
 \lstinputlisting[caption=勝敗を判定する関数その２：Tic Tac Toe,label=prog5_3]{../src/p5_3.src}
 
-（以下は、後述する戦略MiniMax法で使う関数です）
+（以下は、ゲームの局面を評価する関数で、後述する戦略MiniMax法で使う「とても重要な」関数です）
 
 \lstinputlisting[caption=局面を評価する関数：Tic Tac Toe,label=prog5_4]{../src/p5_4.src}
 

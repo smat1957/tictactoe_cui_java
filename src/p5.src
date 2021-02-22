@@ -39,6 +39,6 @@ public class Board {
     }
     boolean isDraw(){   // 勝敗がついていないのに、EMPTYのスロットがもうないならDRAW　
     }
-    float evaluate(Player p, int turn){ // 局面を評価する（MINIMAX法が使う）
+    int evaluate(int turn){ // 局面を評価する（MINIMAX法が使う）
     }
 }

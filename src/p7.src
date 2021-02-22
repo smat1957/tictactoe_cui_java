@@ -26,14 +26,26 @@ public class Strategy {
         } while (true);
         return num;
     }
+
     int random(String name) {
         System.out.printf("。。。　%s 思考中　。。。", name);
         return (int) (Math.random() * (NXN * NXN));
     }
-    private float minimax(Board board, int depth, int turn, Player player) {
+
+    int max(int a, int b){
+        if(a>b)return a;
+        return b;
+    }
+    int min(int a, int b){
+        if(a>b)return b;
+        return a;
+    }
+
+    private int minimax(Board board, int depth, int turn) {
         //　minimax
     }
-    int bestMove(Board board, Player player) {
+
+    int bestMoveMM(Board board, Player player) {
         // minimax
     }
 }

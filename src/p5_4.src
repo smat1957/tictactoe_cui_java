@@ -1,7 +1,32 @@
-float evaluate(Player p, int turn){
-    if(isWin()){
-        if(turn==p.getColor())return (float)(-1.0);
-        else if(turn!=p.getColor())return (float)(1.0);
+    int evaluate(int turn){
+        // 局面を評価する（MINIMAX法が使う）
+        int i;
+        // Checking for Rows
+        for( i=0; i<7; i+=3 ){
+            if( line(i,i+1,i+2) ){
+                if( stones[i].getColor()==WHITE ) return +10;
+                else if( stones[i].getColor()==BLACK ) return -10;
+                else return 0; 
+            }
+        }
+        // Checking for Columns 
+        for( i=0; i<3; i++ ){
+            if( line(i,i+3,i+6) ){
+                if( stones[i].getColor()==WHITE ) return +10;
+                else if( stones[i].getColor()==BLACK ) return -10;
+                else return 0; 
+            }
+        }
+        // Checking for Diagonals
+        if( line(0,4,8) ){
+            if( stones[0].getColor()==WHITE ) return +10;
+            else if( stones[0].getColor()==BLACK ) return -10;
+            else return 0;
+        }
+        if( line(2,4,6) ){
+            if( stones[2].getColor()==WHITE ) return +10;
+            else if( stones[2].getColor()==BLACK ) return -10;
+            else return 0;
+        }
+        return 0;
     }
-    return (float)0.0;
-}
